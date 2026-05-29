@@ -1,49 +1,68 @@
 ---
 name: product-design-orchestrator
-description: Use when coordinating a full product design workflow across design-system intake, business design brief, visual execution, independent review, revision loops, and delivery for product launch visuals, operation banners, popups, infographics, or multi-size marketing assets.
+description: Use when coordinating a full product design workflow across design-system intake, business design brief, coordinate/safe-zone contracts, visual execution, independent review, revision loops, and delivery for exact-size product launch visuals, operation banners, TV projection materials, popups, infographics, or multi-size marketing assets.
 ---
 
 # Product Design Orchestrator
 
-Coordinate the product design agent workflow. Do not replace the designer or reviewer; keep roles separate and make the workflow auditable.
-
-## Role
-
-You are the workflow owner for product design delivery:
-
-- collect user requirements and design-system assets
-- create or update a Design System Contract
-- request a Business Design Brief when strategy or information hierarchy is unclear
-- route visual production to Product Visual Designer
-- route final audit to Product Visual Reviewer
-- turn review findings into a revision brief or delivery checklist
+Coordinate the product design workflow. Keep strategy, execution, and review separate.
 
 ## Core Rules
 
 - Freeze brand rules before production whenever assets are available.
-- If assets are missing, use default mode and clearly mark assumptions.
-- Logo, hero symbol, color, font, and forbidden items are contract-level constraints.
+- Classify every design request into L1 / L2 / L3 before deciding whether AI may produce a final artifact.
+- L1 internal basic comms may be AI-final with checks. L2 large-screen/offline/print materials are AI drafts requiring designer review/refinement. L3 external/customer-facing/compliance-sensitive materials are designer-led; AI provides brief, strategy, inspiration, and references only.
+- Automatically upgrade to L3 if customers/public will see it, customer data/cases are involved, or celebrity/达人/肖像/legal/compliance risk exists. Automatically upgrade to at least L2 for print, TV projection, large screen, 4K/8K, or irreversible launch.
+- For exact-size materials with safe zones, forbidden zones, TV projection constraints, or coordinate-based layouts, do not proceed directly to visual execution.
+- First produce a Business Design Brief and a Design / Export Contract, then wait for explicit user confirmation such as "OK", "按这个做", or "生图吧".
+- Coordinates are contract-level constraints. Treat zones such as `x=1350-1920` or `420×250` as hard production boundaries, including shadows, glows, decorations, cropped remnants, and HTML overflow.
+- Logo, QR codes, reference posters, supplied symbols, color, font, and forbidden items are contract-level constraints.
 - Product Visual Designer must not be treated as the final reviewer.
 - Product Visual Reviewer must be independent and must not edit the artwork.
-- P1 issues should be fixed before delivery. P2 issues should be considered. P3 issues can be recorded as polish.
-- Do not force all stages when the user asks for a narrow task; use only the roles needed.
+- If the user changes the intended layout, update the brief/contract first, then revise artwork.
 
 ## Standard Flow
 
 1. Design System Intake
 2. Business Design Brief
-3. Asset and Export Contract Freeze
-4. Visual Execution
-5. Independent Review
-6. Revision Loop
-7. Delivery
+3. Coordinate / Safe-Zone Contract, when dimensions or reserved regions are involved
+4. User Confirmation
+5. Asset and Export Contract Freeze
+6. Visual Execution
+7. Independent Review
+8. Revision Loop
+9. Delivery
 
-## When To Load References
+## Exact-Size Material Gate
 
-- For a new project or missing brand rules, read `references/design-system-contract.md`.
-- For export details, read `references/export-contract.md`.
-- For review handoff, read `references/review-contract.md`.
-- For a full multi-agent process, read `references/product-design-workflow.md`.
+Use this gate for TV projection materials, banners, popups, large screens, or any request with exact pixel sizes, safe areas, forbidden areas, or templates.
+
+Before production, confirm:
+
+- risk tier and AI delivery boundary
+- final canvas size and scale, e.g. `1920×1080` or `3840×2160`
+- reserved / forbidden zones as coordinates, e.g. `area1 = x=0-420, y=0-250`
+- content zones as coordinates or shapes, e.g. `area3 = remaining L-shaped area`
+- whether zones are equal grid regions, template safe zones, or irregular layout regions
+- what content must appear, what must be unchanged, and what can be omitted
+- source-asset policy: direct reference, slice from reference, editable HTML text, or redraw
+- text contract: exact copy that must not change
+- export files and acceptance checks
+
+## User Confirmation Prompt
+
+Before execution, summarize:
+
+- canvas size
+- risk tier and who owns final approval
+- forbidden zones
+- allowed content zones
+- required content
+- asset policy
+- text that cannot change
+- export and verification plan
+
+Then ask the user to confirm. Do not generate final artwork until confirmed.
 
 ## Default Design System
 
@@ -54,15 +73,14 @@ Use only when the user has not supplied a design system:
 - tone: clean, restrained, young, platform-level
 - output: structured HTML/CSS, SVG, PPT, or Figma-ready layout before bitmap export
 
-## Handoff Contract
+## Review Handoff
 
-When handing off to the reviewer, include only:
+Include only:
 
-- original brief
+- confirmed brief and contract
 - final PNG or HTML path
 - source asset paths
-- expected dimensions
+- expected dimensions and coordinate constraints
 - verification results
-- relevant design-system contract
 
 Do not include the designer's self-justification unless the reviewer asks for it.
